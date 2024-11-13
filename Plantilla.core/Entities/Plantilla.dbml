@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="PS_ORDENES_PRODUCCION" Class="PlantillaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=192.168.11.18;Initial Catalog=PS_ORDENES_PRODUCCION;User ID=sa" SettingsObjectName="Plantilla.core.Properties.Settings" SettingsPropertyName="PS_ORDENES_PRODUCCIONConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="ATCL.ESTADOS_DEMO" Member="ESTADOS_DEMOs">
+    <Type Name="ESTADOS_DEMO">
+      <Column Name="ID" Type="System.String" DbType="VarChar(1) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DESCRIP" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="GLOBAL.PROC_OBT_ORDENES_PRODUCCION_FILTRO" Method="PROC_OBT_ORDENES_PRODUCCION_FILTRO">
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_ORDENES_PRODUCCION_FILTROResult">
+      <Column Name="DOCUMENTO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_USUARIOS_ORDENES_PRODUCCION_FILTRO" Method="PROC_OBT_USUARIOS_ORDENES_PRODUCCION_FILTRO">
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_USUARIOS_ORDENES_PRODUCCION_FILTROResult">
+      <Column Name="USUARIO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="COMPLETO" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_SIGUIENTE_CONSECUTIVO_ORDENES_PRODUCCION" Method="PROC_OBT_SIGUIENTE_CONSECUTIVO_ORDENES_PRODUCCION">
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_SIGUIENTE_CONSECUTIVO_ORDENES_PRODUCCIONResult">
+      <Column Name="SIGUIENTE_CONSEC" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_BODEGAS" Method="PROC_OBT_BODEGAS">
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_BODEGASResult">
+      <Column Name="BODEGA" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="NOMBRE" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_ARTICULOS_A_PRODUCIR" Method="PROC_OBT_ARTICULOS_A_PRODUCIR">
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_ARTICULOS_A_PRODUCIRResult">
+      <Column Name="ARTICULO" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+      <Column Name="COMPLETO" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_ULTIMA_ORDEN_PRODUCCION" Method="PROC_OBT_ULTIMA_ORDEN_PRODUCCION">
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_ULTIMA_ORDEN_PRODUCCIONResult">
+      <Column Name="DOCUMENTO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_CENTROS_DE_COSTO" Method="PROC_OBT_CENTROS_DE_COSTO">
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_CENTROS_DE_COSTOResult">
+      <Column Name="CENTRO_COSTO" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="COMPLETO" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_CUENTAS_CONTABLES" Method="PROC_OBT_CUENTAS_CONTABLES">
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_CUENTAS_CONTABLESResult">
+      <Column Name="CUENTA_CONTABLE" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="COMPLETO" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_ARTICULOS_A_CONSUMIR" Method="PROC_OBT_ARTICULOS_A_CONSUMIR">
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_ARTICULOS_A_CONSUMIRResult">
+      <Column Name="ARTICULO" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="COMPLETO" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_DEL_ORDEN_PRODUCCION_LINEA" Method="PROC_DEL_ORDEN_PRODUCCION_LINEA">
+    <Parameter Name="DOCUMENTO" Parameter="dOCUMENTO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="LINEA" Parameter="lINEA" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="GLOBAL.PROC_DEL_ORDEN_PRODUCCION" Method="PROC_DEL_ORDEN_PRODUCCION">
+    <Parameter Name="DOCUMENTO" Parameter="dOCUMENTO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_CUENTAS_CONTABLES_X_CENTRO_COSTO" Method="PROC_OBT_CUENTAS_CONTABLES_X_CENTRO_COSTO">
+    <Parameter Name="CENTRO_COSTO" Parameter="cENTRO_COSTO" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_CUENTAS_CONTABLES_X_CENTRO_COSTOResult">
+      <Column Name="CENTRO_COSTO" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="CUENTA_CONTABLE" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="COMPLETO" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_EDI_APROBAR_ORDEN_PRODUCCION" Method="PROC_EDI_APROBAR_ORDEN_PRODUCCION">
+    <Parameter Name="DOCUMENTO" Parameter="dOCUMENTO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="USUARIO" Parameter="uSUARIO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="GLOBAL.PROC_EDI_BODEGA_ORDEN_PRODUCCION_LINEA" Method="PROC_EDI_BODEGA_ORDEN_PRODUCCION_LINEA">
+    <Parameter Name="DOCUMENTO" Parameter="dOCUMENTO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="LINEA" Parameter="lINEA" Type="System.Int32" DbType="Int" />
+    <Parameter Name="BODEGA" Parameter="bODEGA" Type="System.String" DbType="VarChar(4)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="GLOBAL.PROC_EDI_CANTIDAD_ORDEN_PRODUCCION_LINEA" Method="PROC_EDI_CANTIDAD_ORDEN_PRODUCCION_LINEA">
+    <Parameter Name="DOCUMENTO" Parameter="dOCUMENTO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="LINEA" Parameter="lINEA" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CANTIDAD" Parameter="cANTIDAD" Type="System.Decimal" DbType="Decimal(28,8)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="GLOBAL.PROC_EDI_CENTRO_COSTO_ORDEN_PRODUCCION_LINEA" Method="PROC_EDI_CENTRO_COSTO_ORDEN_PRODUCCION_LINEA">
+    <Parameter Name="DOCUMENTO" Parameter="dOCUMENTO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="LINEA" Parameter="lINEA" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CENTRO_COSTO" Parameter="cENTRO_COSTO" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="GLOBAL.PROC_EDI_CUENTA_CONTABLE_ORDEN_PRODUCCION_LINEA" Method="PROC_EDI_CUENTA_CONTABLE_ORDEN_PRODUCCION_LINEA">
+    <Parameter Name="DOCUMENTO" Parameter="dOCUMENTO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="LINEA" Parameter="lINEA" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CUENTA_CONTABLE" Parameter="cUENTA_CONTABLE" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_BODEGAS_X_ARTICULO" Method="PROC_OBT_BODEGAS_X_ARTICULO">
+    <Parameter Name="ARTICULO" Parameter="aRTICULO" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_BODEGAS_X_ARTICULOResult">
+      <Column Name="BODEGA" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="COMPLETO" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+      <Column Name="EXISTENCIA" Type="System.Decimal" DbType="Decimal(28,2)" CanBeNull="true" />
+      <Column Name="ARTICULO" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_EXISTENCIAS_X_ARTICULO" Method="PROC_OBT_EXISTENCIAS_X_ARTICULO">
+    <Parameter Name="ARTICULO" Parameter="aRTICULO" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="BODEGA" Parameter="bODEGA" Type="System.String" DbType="VarChar(4)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_EXISTENCIAS_X_ARTICULOResult">
+      <Column Name="BODEGA" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="EXISTENCIA" Type="System.Decimal" DbType="Decimal(28,2)" CanBeNull="true" />
+      <Column Name="ARTICULO" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_USUARIOS" Method="PROC_OBT_USUARIOS">
+    <Parameter Name="ROL" Parameter="rOL" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="PROC_OBT_USUARIOSResult">
+      <Column Name="USUARIO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="NOMBRE" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="ROL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ROL_DESCRIPCION" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ESTADO" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_EDI_ESTADO_USUARIO" Method="PROC_EDI_ESTADO_USUARIO">
+    <Parameter Name="USUARIO" Parameter="uSUARIO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ESTADO" Parameter="eSTADO" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_ROLES" Method="PROC_OBT_ROLES">
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="PROC_OBT_ROLESResult">
+      <Column Name="ROL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_EDI_USUARIO" Method="PROC_EDI_USUARIO">
+    <Parameter Name="USUARIO" Parameter="uSUARIO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ROL" Parameter="rOL" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="GLOBAL.PROC_EDI_DESCRIPCION_ROL" Method="PROC_EDI_DESCRIPCION_ROL">
+    <Parameter Name="ROL" Parameter="rOL" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DESCRIPCION" Parameter="dESCRIPCION" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_USUARIOS_PARA_INSERTAR" Method="PROC_OBT_USUARIOS_PARA_INSERTAR">
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="PROC_OBT_USUARIOS_PARA_INSERTARResult">
+      <Column Name="USUARIO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_INS_USUARIO" Method="PROC_INS_USUARIO">
+    <Parameter Name="USUARIO" Parameter="uSUARIO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ROL" Parameter="rOL" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="GLOBAL.PROC_INS_ROL" Method="PROC_INS_ROL">
+    <Parameter Name="DESCRIPCION" Parameter="dESCRIPCION" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="GLOBAL.PROC_EDI_PERMISOS" Method="PROC_EDI_PERMISOS">
+    <Parameter Name="ROL" Parameter="rOL" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ORDEN_PRODUCCION" Parameter="oRDEN_PRODUCCION" Type="System.Int32" DbType="Int" />
+    <Parameter Name="USUARIOS" Parameter="uSUARIOS" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="GLOBAL.PROC_VAL_USUARIO_SOFTLAND" Method="PROC_VAL_USUARIO_SOFTLAND">
+    <Parameter Name="USUARIO" Parameter="uSUARIO" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="PASS" Parameter="pASS" Type="System.String" DbType="VarChar(250)" />
+    <ElementType Name="PROC_VAL_USUARIO_SOFTLANDResult">
+      <Column Name="VALID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_VAL_USUARIO" Method="PROC_VAL_USUARIO">
+    <Parameter Name="USUARIO" Parameter="uSUARIO" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="PASS" Parameter="pASS" Type="System.String" DbType="VarChar(250)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="PROC_VAL_USUARIOResult">
+      <Column Name="VALID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_VAL_USUARIO_ACTIVO" Method="PROC_VAL_USUARIO_ACTIVO">
+    <Parameter Name="USUARIO" Parameter="uSUARIO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="PROC_VAL_USUARIO_ACTIVOResult">
+      <Column Name="ACTIVO" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_USUARIO_PERMISOS" Method="PROC_OBT_USUARIO_PERMISOS">
+    <Parameter Name="ROL" Parameter="rOL" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_USUARIO_PERMISOSResult">
+      <Column Name="ROL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ORDEN_PRODUCCION" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="USUARIOS" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_VAL_USUARIO_ROL" Method="PROC_VAL_USUARIO_ROL">
+    <Parameter Name="USUARIO" Parameter="uSUARIO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="PROC_VAL_USUARIO_ROLResult">
+      <Column Name="ROL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="USUARIO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CIA" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="NOMBRE" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="CORREO" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_PERMISOS" Method="PROC_OBT_PERMISOS">
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="PROC_OBT_PERMISOSResult">
+      <Column Name="ROL" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ORDEN_PRODUCCION" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="USUARIOS" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_BODEGAS_X_ARTICULO_PARA_SELECCIONAR" Method="PROC_OBT_BODEGAS_X_ARTICULO_PARA_SELECCIONAR">
+    <Parameter Name="ARTICULO" Parameter="aRTICULO" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_BODEGAS_X_ARTICULO_PARA_SELECCIONARResult">
+      <Column Name="BODEGA" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_EDI_HORA_FIN_ORDEN_PRODUCCION_LINEA" Method="PROC_EDI_HORA_FIN_ORDEN_PRODUCCION_LINEA">
+    <Parameter Name="DOCUMENTO" Parameter="dOCUMENTO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="LINEA" Parameter="lINEA" Type="System.Int32" DbType="Int" />
+    <Parameter Name="HORA_FIN" Parameter="hORA_FIN" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="GLOBAL.PROC_EDI_HORA_INICIO_ORDEN_PRODUCCION_LINEA" Method="PROC_EDI_HORA_INICIO_ORDEN_PRODUCCION_LINEA">
+    <Parameter Name="DOCUMENTO" Parameter="dOCUMENTO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="LINEA" Parameter="lINEA" Type="System.Int32" DbType="Int" />
+    <Parameter Name="HORA_INICIO" Parameter="hORA_INICIO" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="GLOBAL.PROC_INS_ORDEN_PRODUCCION_LINEA" Method="PROC_INS_ORDEN_PRODUCCION_LINEA">
+    <Parameter Name="ARTICULO" Parameter="aRTICULO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="BODEGA" Parameter="bODEGA" Type="System.String" DbType="VarChar(4)" />
+    <Parameter Name="CANTIDAD" Parameter="cANTIDAD" Type="System.Decimal" DbType="Decimal(28,8)" />
+    <Parameter Name="HORA_INICIO" Parameter="hORA_INICIO" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="HORA_FIN" Parameter="hORA_FIN" Type="System.String" DbType="VarChar(5)" />
+    <Parameter Name="DOCUMENTO" Parameter="dOCUMENTO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="LOCALIZACION" Parameter="lOCALIZACION" Type="System.String" DbType="VarChar(8)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_ORDENES_PRODUCCION" Method="PROC_OBT_ORDENES_PRODUCCION">
+    <Parameter Name="FECHA_INICIO" Parameter="fECHA_INICIO" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="FECHA_FINAL" Parameter="fECHA_FINAL" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="ORDEN" Parameter="oRDEN" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ARTICULO" Parameter="aRTICULO" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="BODEGA" Parameter="bODEGA" Type="System.String" DbType="VarChar(4)" />
+    <Parameter Name="ESTADO" Parameter="eSTADO" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="USUARIO" Parameter="uSUARIO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_ORDENES_PRODUCCIONResult">
+      <Column Name="DOCUMENTO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ARTICULO" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ARTICULO_COMPLETO" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="UNIDAD_DE_MEDIDA" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="HOJAS" Type="System.Decimal" DbType="Decimal(28,2)" CanBeNull="true" />
+      <Column Name="BODEGA" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="CANTIDAD" Type="System.Decimal" DbType="Decimal(28,2)" CanBeNull="true" />
+      <Column Name="REFERENCIA" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="ESTADO" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="LINEAS" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FECHA" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FECHA_STR" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="USUARIO" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="APROBADOR" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FECHA_APROBACION" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_ORDENES_PRODUCCION_LINEAS" Method="PROC_OBT_ORDENES_PRODUCCION_LINEAS">
+    <Parameter Name="ORDEN" Parameter="oRDEN" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_ORDENES_PRODUCCION_LINEASResult">
+      <Column Name="DOCUMENTO_INV" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LINEA" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ARTICULO" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ARTICULO_NOMBRE" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+      <Column Name="BODEGA" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="EXISTENCIA" Type="System.Decimal" DbType="Decimal(28,8)" CanBeNull="true" />
+      <Column Name="CONSUMIDO" Type="System.Decimal" DbType="Decimal(28,8)" CanBeNull="true" />
+      <Column Name="CENTRO_COSTO" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="CENTRO_COSTO_NOMBRE" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="CUENTA_CONTABLE" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="CUENTA_CONTABLE_NOMBRE" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="ESTADO" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="APROBADOR" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="HORA_INICIO" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="HORA_FIN" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="TIEMPO_TEORICO" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_INS_ORDEN_PRODUCCION" Method="PROC_INS_ORDEN_PRODUCCION">
+    <Parameter Name="ARTICULO" Parameter="aRTICULO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="RECETA" Parameter="rECETA" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="BODEGA" Parameter="bODEGA" Type="System.String" DbType="VarChar(4)" />
+    <Parameter Name="CANTIDAD" Parameter="cANTIDAD" Type="System.Decimal" DbType="Decimal(28,8)" />
+    <Parameter Name="HOJAS" Parameter="hOJAS" Type="System.Decimal" DbType="Decimal(28,8)" />
+    <Parameter Name="USUARIO" Parameter="uSUARIO" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="REFERENCIA" Parameter="rEFERENCIA" Type="System.String" DbType="VarChar(200)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_RECETAS_A_PRODUCIR" Method="PROC_OBT_RECETAS_A_PRODUCIR">
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_RECETAS_A_PRODUCIRResult">
+      <Column Name="RECETA" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+      <Column Name="COMPLETO" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_ORDEN_PRODUCCION" Method="PROC_OBT_ORDEN_PRODUCCION">
+    <Parameter Name="ORDEN" Parameter="oRDEN" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_ORDEN_PRODUCCIONResult">
+      <Column Name="DOCUMENTO" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="REFERENCIA" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="ESTADO" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="LINEAS" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FECHA" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FECHA_STR" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="FECHA_STR_SIN_HORAS" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="USUARIO" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="ARTICULO" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="RECETA" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CANTIDAD" Type="System.Decimal" DbType="Decimal(28,2)" CanBeNull="true" />
+      <Column Name="BODEGA" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="HOJAS" Type="System.Decimal" DbType="Decimal(28,2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="GLOBAL.PROC_OBT_RECETAS_X_ARTICULO_PARA_SELECCIONAR" Method="PROC_OBT_RECETAS_X_ARTICULO_PARA_SELECCIONAR">
+    <Parameter Name="ARTICULO" Parameter="aRTICULO" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="CIA" Parameter="cIA" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="PROC_OBT_RECETAS_X_ARTICULO_PARA_SELECCIONARResult">
+      <Column Name="RECETA" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

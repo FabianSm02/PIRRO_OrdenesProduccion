@@ -1,0 +1,575 @@
+﻿﻿
+@{
+    ViewBag.Title = "Administración de usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--begin::Content wrapper-->
+<div class="d-flex flex-column flex-column-fluid">
+    <!--begin::Content-->
+    <div id="kt_app_content" class="app-content flex-column-fluid">
+        <!--begin::Content container-->
+        <div id="kt_app_content_container" class="app-container container-xxl" style="max-width:100% !important">
+
+            <!--begin::Content-->
+            <div class="flex-lg-row-fluid ms-lg-15">
+                <!--begin:::Tabs-->
+                <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-8">
+                    <!--begin:::Tab item-->
+                    <li class="nav-item">
+                        <a id="optprin" class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#tabUsuarios" onclick="RecargarTabla(1)">Usuarios</a>
+                    </li>
+                    <!--end:::Tab item-->
+                    <!--begin:::Tab item-->
+                    <li class="nav-item">
+                        <a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#tabRoles" onclick="RecargarTabla(2)">Roles</a>
+                    </li>
+                    <!--end:::Tab item-->
+                    <!--begin:::Tab item-->
+                    <li class="nav-item">
+                        <a id="optchat" class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#tabPermisos" onclick="RecargarTabla(3)">Permisos</a>
+                    </li>
+                    <!--end:::Tab item-->
+                </ul>
+                <!--end:::Tabs-->
+                <!--begin:::Tab content-->
+                <div class="tab-content" id="myTabContent">
+                    <!--begin:::Tab pane-->
+                    <div class="tab-pane fade show active" id="tabUsuarios" role="tabpanel">
+                        <!--begin::Card-->
+
+                        <div class="card">
+                            <!--begin::Card header-->
+                            <div class="card-header border-0">
+                                <!--begin::Card title-->
+                                <div class="card-title">
+                                    <h2>Usuarios</h2>
+                                </div>
+                                <!--end::Card title-->
+                            </div>
+                            <!--end::Card header-->
+                            <div class="card-body pt-0">
+
+                                <div class="row align-items-center mt-7">
+
+                                    <div class="form-group col-md-3 mt-3">
+                                        <label>Rol</label>
+                                        <select id="FiltroRol" name="FiltroRol" class="form-select filtro" data-control="select2" data-placeholder="Filtrar por un rol">
+                                            <option></option>
+                                            <option selected value="0">Todos</option>
+                                            @if (ViewBag.Roles != null)
+                                            {
+                                                foreach (var item in ViewBag.Roles)
+                                                {
+                                                    <option value="@item.ROL">@item.DESCRIPCION</option>
+                                                }
+                                            }
+
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-3 offset-md-6 mt-8">
+                                        <div class="input-icon">
+                                            <input type="text" class="form-control" placeholder="Buscar..." id="kt_datatable_search_query" data-kt-docs-table-filter="search" autocomplete="off" />
+                                            <span>
+                                                <i class="flaticon2-search-1 text-muted"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br /><br /><br />
+                                <!--begin::Table-->
+                                <table class="table align-middle table-row-dashed fs-6 gy-4" id="tablaUsuarios">
+                                    <!--begin::Table head-->
+                                    <thead>
+                                        <!--begin::Table row-->
+                                        <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+
+                                            <th class="text-left min-w-100px">Usuario</th>
+                                            <th class="text-left min-w-100px">Nombre</th>
+                                            <th class="text-left min-w-100px">Rol</th>
+                                            <th class="text-left min-w-100px">Descripcion</th>
+                                            <th class="text-left min-w-100px">Estado</th>
+                                            <th class="text-left min-w-250px">Acciones</th>
+                                        </tr>
+                                        <!--end::Table row-->
+                                    </thead>
+                                    <!--end::Table head-->
+                                    <!--begin::Table body-->
+                                    <tbody class="fw-bold text-gray-600">
+                                    </tbody>
+                                    <!--end::Table body-->
+                                </table>
+                                <!--end::Table-->
+                            </div>
+                        </div>
+                        <!--end::Navbar-->
+                        <!--begin::Engage-->
+                        <div class="app-engage">
+                            @if (Session["USUARIOS"].ToString() == "1")
+                            {
+                                <a href="javascript:;" id="nuevo-usuario" onclick="CrearUsuario()" class="app-engage-btn hover-primary" data-original-title="Nuevo usuario">
+                                    <span class="svg-icon svg-icon-2">
+                                        <i class="las la-plus fs-2x"></i>
+                                    </span>Usuario
+                                </a>
+                            }
+
+                            <!--begin::Get help-->
+                            <a href="javascript:;" class="app-engage-btn hover-primary" onclick="Volver()">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen063.svg-->
+                                <span class="svg-icon svg-icon-1 pt-1 mb-2">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M21.7189 13.9C17.6189 9.8 11.4189 8.79999 6.21895 11.2L7.31895 12.9C11.719 11 16.919 12 20.319 15.4C20.519 15.6 20.819 15.7 21.019 15.7C21.219 15.7 21.5189 15.6 21.7189 15.4C22.1189 14.9 22.1189 14.2 21.7189 13.9Z" fill="currentColor" />
+                                        <path opacity="0.3" d="M10.119 17.1L3.61896 7L2.01895 14.3C1.91895 14.8 2.21895 15.4 2.81895 15.5L10.119 17.1Z" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->Volver
+                            </a>
+                            <!--end::Get help-->
+                        </div>
+                        <!--end::Engage-->
+                    </div>
+                    <!--end:::Tab pane-->
+                    <!--begin:::Tab pane-->
+                    <div class="tab-pane fade" id="tabRoles" role="tabpanel">
+                        <!--begin::Card-->
+
+                        <div class="card">
+                            <!--begin::Card header-->
+                            <div class="card-header border-0">
+                                <!--begin::Card title-->
+                                <div class="card-title">
+                                    <h2>Roles</h2>
+                                </div>
+                                <!--end::Card title-->
+                            </div>
+                            <!--end::Card header-->
+                            <div class="card-body pt-0">
+                                <!--begin::Table-->
+                                <table class="table align-middle table-row-dashed fs-6 gy-4" id="tablaRoles">
+                                    <!--begin::Table head-->
+                                    <thead>
+                                        <!--begin::Table row-->
+                                        <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+
+                                            <th class="text-left min-w-100px">Consecutivo</th>
+                                            <th class="text-left min-w-150px">Rol</th>
+                                            <th class="text-left min-w-150px">Acciones</th>
+                                        </tr>
+                                        <!--end::Table row-->
+                                    </thead>
+                                    <!--end::Table head-->
+                                    <!--begin::Table body-->
+                                    <tbody class="fw-bold text-gray-600">
+                                    </tbody>
+                                    <!--end::Table body-->
+                                </table>
+                                <!--end::Table-->
+                            </div>
+                        </div>
+                        <!--end::Navbar-->
+                        <!--begin::Engage-->
+                        <div class="app-engage">
+                            @if (Session["USUARIOS"].ToString() == "1")
+                            {
+                                <a href="javascript:;" id="nuevo-rol" onclick="CrearRol()" class="app-engage-btn hover-primary" data-original-title="Nuevo rol">
+                                    <span class="svg-icon svg-icon-2">
+                                        <i class="las la-plus fs-2x"></i>
+                                    </span>Rol
+                                </a>
+                            }
+
+                            <!--begin::Get help-->
+                            <a href="javascript:;" class="app-engage-btn hover-primary" onclick="Volver()">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen063.svg-->
+                                <span class="svg-icon svg-icon-1 pt-1 mb-2">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M21.7189 13.9C17.6189 9.8 11.4189 8.79999 6.21895 11.2L7.31895 12.9C11.719 11 16.919 12 20.319 15.4C20.519 15.6 20.819 15.7 21.019 15.7C21.219 15.7 21.5189 15.6 21.7189 15.4C22.1189 14.9 22.1189 14.2 21.7189 13.9Z" fill="currentColor" />
+                                        <path opacity="0.3" d="M10.119 17.1L3.61896 7L2.01895 14.3C1.91895 14.8 2.21895 15.4 2.81895 15.5L10.119 17.1Z" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->Volver
+                            </a>
+                            <!--end::Get help-->
+                        </div>
+                        <!--end::Engage-->
+
+                    </div>
+                    <!--end:::Tab pane-->
+                    <!--begin:::Tab pane-->
+                    <div class="tab-pane fade" id="tabPermisos" role="tabpanel">
+                        <!--begin::Card-->
+
+                        <div class="card">
+                            <!--begin::Card header-->
+                            <div class="card-header border-0">
+                                <!--begin::Card title-->
+                                <div class="card-title">
+                                    <h2>Permisos</h2>
+                                </div>
+                                <!--end::Card title-->
+                            </div>
+                            <!--end::Card header-->
+                            <div class="card-body pt-0">
+                                <!--begin::Table-->
+                                <table class="table align-middle table-row-dashed fs-6 gy-4" id="tablaPermisos">
+                                    <!--begin::Table head-->
+                                    <thead>
+                                        <!--begin::Table row-->
+                                        <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+
+                                            <th class="text-left min-w-100px">Rol</th>
+                                            <th class="text-left min-w-100px">ÓRDENES DE PRODUCCIÓN</th>
+                                            <th class="text-left min-w-100px">ADMINISTRACIÓN DE USUARIOS</th>
+                                            <th class="text-left min-w-150px">Acciones</th>
+                                        </tr>
+                                        <!--end::Table row-->
+                                    </thead>
+                                    <!--end::Table head-->
+                                    <!--begin::Table body-->
+                                    <tbody class="fw-bold text-gray-600">
+                                    </tbody>
+                                    <!--end::Table body-->
+                                </table>
+                                <!--end::Table-->
+                            </div>
+                        </div>
+                        <!--end::Navbar-->
+                    </div>
+                    <!--end:::Tab pane-->
+                </div>
+                <!--end:::Tab content-->
+            </div>
+            <!--end::Content-->
+
+        </div>
+        <!--end::Content container-->
+    </div>
+    <!--end::Content-->
+</div>
+<!--end::Content wrapper-->
+@*++++++++++++++++++++++++++++++++++++++++++++++++MODAL EDITAR USUARIO ++++++++++++++++++++++++++++++++++++++++++++++++++++++*@
+<div class="modal fade" tabindex="-1" id="modalEditarUsuario">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalEditarUsuarioLabel">Modificar usuario</h3>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <span class="svg-icon svg-icon-muted svg-icon-2x">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path opacity="0.3" d="M6 19.7C5.7 19.7 5.5 19.6 5.3 19.4C4.9 19 4.9 18.4 5.3 18L18 5.3C18.4 4.9 19 4.9 19.4 5.3C19.8 5.7 19.8 6.29999 19.4 6.69999L6.7 19.4C6.5 19.6 6.3 19.7 6 19.7Z" fill="currentColor" />
+                            <path d="M18.8 19.7C18.5 19.7 18.3 19.6 18.1 19.4L5.40001 6.69999C5.00001 6.29999 5.00001 5.7 5.40001 5.3C5.80001 4.9 6.40001 4.9 6.80001 5.3L19.5 18C19.9 18.4 19.9 19 19.5 19.4C19.3 19.6 19 19.7 18.8 19.7Z" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+                <!--end::Close-->
+            </div>
+
+            <div class="modal-body">
+                <form id="frm-editar-usuario" class="row">
+                    <div class="form-group mb-6">
+                        <label for="Usuario">Usuario</label>
+                        <input disabled type="text" class="form-control text-gray-500" id="UsuarioEditar" style="font-size:0.90rem;" name="Usuario" autocomplete="off" value="" placeholder="" />
+                    </div>
+                    <div class="form-group mb-6">
+                        <label for="Empleado">Nombre</label>
+                        <input disabled type="text" class="form-control text-gray-500" id="EditarColaborador" style="font-size:0.90rem;" name="Empleado" placeholder="" autocomplete="off" value="" />
+                    </div>
+                    <div class="form-group mb-6">
+                        <label for="RolUsuario">Rol</label>
+                        <select id="RolUsuarioEditar" name="RolUsuario" class="form-select  rol-usuario" data-dropdown-parent="#modalEditarUsuario" data-control="select2" data-placeholder="Seleccione un rol">
+                            <option></option>
+                            @if (ViewBag.Roles != null)
+                            {
+                                foreach (var item in ViewBag.Roles)
+                                {
+                                    <option value="@item.ROL">@item.DESCRIPCION</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" id="btn-editar-usuario" value="Default" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*++++++++++++++++++++++++++++++++++++++++++++++++MODAL NUEVO USUARIO ++++++++++++++++++++++++++++++++++++++++++++++++++++++*@
+<div class="modal fade" tabindex="-1" id="modalInsertarUsuario">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Registrar nuevo usuario</h3>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <span class="svg-icon svg-icon-muted svg-icon-2x">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path opacity="0.3" d="M6 19.7C5.7 19.7 5.5 19.6 5.3 19.4C4.9 19 4.9 18.4 5.3 18L18 5.3C18.4 4.9 19 4.9 19.4 5.3C19.8 5.7 19.8 6.29999 19.4 6.69999L6.7 19.4C6.5 19.6 6.3 19.7 6 19.7Z" fill="currentColor" />
+                            <path d="M18.8 19.7C18.5 19.7 18.3 19.6 18.1 19.4L5.40001 6.69999C5.00001 6.29999 5.00001 5.7 5.40001 5.3C5.80001 4.9 6.40001 4.9 6.80001 5.3L19.5 18C19.9 18.4 19.9 19 19.5 19.4C19.3 19.6 19 19.7 18.8 19.7Z" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+                <!--end::Close-->
+            </div>
+
+            <div class="modal-body">
+                <form class="row" id="frm-insertar-usuario">
+                    <div class="form-group mb-6">
+                        <label>Usuario</label>
+                        <select id="UsuarioParaInsertar" name="UsuarioInsertar" class="form-select" data-dropdown-parent="#modalInsertarUsuario" data-control="select2" data-placeholder="Seleccione un usuario">
+                            <option></option>
+                            @if (ViewBag.ListaUsuariosInsertar != null)
+                            {
+                                foreach (var item in ViewBag.ListaUsuariosInsertar)
+                                {
+                                    <option value="@item.USUARIO">@item.DESCRIPCION</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+                    <div class="form-group mb-6">
+                        <label>Rol</label>
+                        <select id="RolParaInsertar" name="RolInsertar" class="form-select" data-dropdown-parent="#modalInsertarUsuario" data-control="select2" data-placeholder="Seleccione un rol">
+                            <option></option>
+                            @if (ViewBag.Roles != null)
+                            {
+                                foreach (var item in ViewBag.Roles)
+                                {
+                                    <option value="@item.ROL">@item.DESCRIPCION</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" id="btn-insertar-usuario" value="Default" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*++++++++++++++++++++++++++++++++++++++++++++++++MODAL EDITAR Rol ++++++++++++++++++++++++++++++++++++++++++++++++++++++*@
+<div class="modal fade" tabindex="-1" id="modalEditarRol2">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Editar rol</h3>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <span class="svg-icon svg-icon-muted svg-icon-2x">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path opacity="0.3" d="M6 19.7C5.7 19.7 5.5 19.6 5.3 19.4C4.9 19 4.9 18.4 5.3 18L18 5.3C18.4 4.9 19 4.9 19.4 5.3C19.8 5.7 19.8 6.29999 19.4 6.69999L6.7 19.4C6.5 19.6 6.3 19.7 6 19.7Z" fill="currentColor" />
+                            <path d="M18.8 19.7C18.5 19.7 18.3 19.6 18.1 19.4L5.40001 6.69999C5.00001 6.29999 5.00001 5.7 5.40001 5.3C5.80001 4.9 6.40001 4.9 6.80001 5.3L19.5 18C19.9 18.4 19.9 19 19.5 19.4C19.3 19.6 19 19.7 18.8 19.7Z" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+                <!--end::Close-->
+            </div>
+
+            <div class="modal-body">
+                <form id="frm-editar-rol" class="row">
+
+                    <input hidden type="text" name="Rol" id="EditarRolId" />
+                    <input hidden type="text" class="form-control" name="Descripcion" id="EditarRolDescripcion" />
+
+                    <div class="form-group mb-6">
+                        <label>Descripción del rol</label>
+                        <input type="text" class="form-control text-gray-500" id="EditarRolComentario" style="font-size:0.90rem;" name="Comentario" autocomplete="off" value="" />
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" id="btn-editar-rol" value="Default" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*++++++++++++++++++++++++++++++++++++++++++++++++MODAL AGREGAR ROL ++++++++++++++++++++++++++++++++++++++++++++++++++++++*@
+<div class="modal fade" tabindex="-1" id="modalInsertarRol">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Agregar nuevo rol</h3>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <span class="svg-icon svg-icon-muted svg-icon-2x">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path opacity="0.3" d="M6 19.7C5.7 19.7 5.5 19.6 5.3 19.4C4.9 19 4.9 18.4 5.3 18L18 5.3C18.4 4.9 19 4.9 19.4 5.3C19.8 5.7 19.8 6.29999 19.4 6.69999L6.7 19.4C6.5 19.6 6.3 19.7 6 19.7Z" fill="currentColor" />
+                            <path d="M18.8 19.7C18.5 19.7 18.3 19.6 18.1 19.4L5.40001 6.69999C5.00001 6.29999 5.00001 5.7 5.40001 5.3C5.80001 4.9 6.40001 4.9 6.80001 5.3L19.5 18C19.9 18.4 19.9 19 19.5 19.4C19.3 19.6 19 19.7 18.8 19.7Z" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+                <!--end::Close-->
+            </div>
+
+            <div class="modal-body">
+                <form id="frm-insertar-rol" class="row">
+
+                    <input hidden type="text" name="Rol" id="InsertarRolId" />
+                    <div class="form-group mb-6">
+                        <label>Descripción del rol</label>
+                        <input type="text" class="form-control text-gray-500" id="InsertarDescripcion" style="font-size:0.90rem;" name="Descripcion" autocomplete="off" value="" placeholder="Agregue el nombre del rol" />
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" id="btn-insertar-rol" value="Default" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@*++++++++++++++++++++++++++++++++++++++++++++++++MODAL EDITAR PERMISOS ++++++++++++++++++++++++++++++++++++++++++++++++++++++*@
+<div class="modal fade" tabindex="-1" id="modalEditarPermisos">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalEditarPermisosLabel">Editar permisos del rol</h3>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <span class="svg-icon svg-icon-muted svg-icon-2x">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path opacity="0.3" d="M6 19.7C5.7 19.7 5.5 19.6 5.3 19.4C4.9 19 4.9 18.4 5.3 18L18 5.3C18.4 4.9 19 4.9 19.4 5.3C19.8 5.7 19.8 6.29999 19.4 6.69999L6.7 19.4C6.5 19.6 6.3 19.7 6 19.7Z" fill="currentColor" />
+                            <path d="M18.8 19.7C18.5 19.7 18.3 19.6 18.1 19.4L5.40001 6.69999C5.00001 6.29999 5.00001 5.7 5.40001 5.3C5.80001 4.9 6.40001 4.9 6.80001 5.3L19.5 18C19.9 18.4 19.9 19 19.5 19.4C19.3 19.6 19 19.7 18.8 19.7Z" fill="currentColor" />
+                        </svg>
+                    </span>
+                </div>
+                <!--end::Close-->
+            </div>
+
+            <div class="modal-body">
+                <form id="frm-editar-permisos" class="row">
+                    <input hidden id="p-rol" name="rol" />
+                    <!--begin::Permissions-->
+                    <div class="fv-row">
+                        <!--begin::Label-->
+                        <!--end::Label-->
+                        <!--begin::Table wrapper-->
+                        <div class="table-responsive">
+                            <!--begin::Table-->
+                            <table class="table align-middle table-row-dashed fs-6 gy-5">
+                                <!--begin::Table body-->
+                                <tbody class="text-gray-600 fw-semibold">
+                                    <!--begin::Table row-->
+                                    <tr>
+                                        <td class="text-gray-800">
+                                            <label>Módulos</label>
+                                        </td>
+
+                                    </tr>
+                                    <!--end::Table row-->
+                                    <!--begin::Table row-->
+                                    <tr>
+                                        <!--begin::Label-->
+                                        <td class="text-gray-800"><label>ÓRDENES DE PRODUCCIÓN</label></td>
+                                        <!--end::Label-->
+                                        <!--begin::Input group-->
+                                        <td>
+                                            <!--begin::Wrapper-->
+                                            <div class="d-flex">
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                    <input class="form-check-input" type="radio" value="1" id="rd-ordenProduccion-1" name="ordenProduccion" />
+                                                    <span class="form-check-label">Administrar</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-success form-check-solid me-5 me-lg-20">
+                                                    <input class="form-check-input" type="radio" value="2" id="rd-ordenProduccion-2" name="ordenProduccion" />
+                                                    <span class="form-check-label">Listar</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-danger form-check-solid">
+                                                    <input class="form-check-input" type="radio" value="3" id="rd-ordenProduccion-3" name="ordenProduccion" />
+                                                    <span class="form-check-label">Deshabilitar</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                            </div>
+                                            <!--end::Wrapper-->
+                                        </td>
+                                        <!--end::Input group-->
+                                    </tr>
+                                    <!--end::Table row-->
+                                    <!--begin::Table row-->
+                                    <tr>
+                                        <!--begin::Label-->
+                                        <td class="text-gray-800"><label>ADMINISTRACIÓN DE USUARIOS</label></td>
+                                        <!--end::Label-->
+                                        <!--begin::Input group-->
+                                        <td>
+                                            <!--begin::Wrapper-->
+                                            <div class="d-flex">
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                    <input class="form-check-input" type="radio" value="1" id="rd-usuarios-1" name="usuarios" />
+                                                    <span class="form-check-label">Administrar</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-success form-check-solid me-5 me-lg-20">
+                                                    <input class="form-check-input" type="radio" value="2" id="rd-usuarios-2" name="usuarios" />
+                                                    <span class="form-check-label">Listar</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                                <!--begin::Checkbox-->
+                                                <label class="form-check form-check-custom form-check-danger form-check-solid">
+                                                    <input class="form-check-input" type="radio" value="3" id="rd-usuarios-3" name="usuarios" />
+                                                    <span class="form-check-label">Deshabilitar</span>
+                                                </label>
+                                                <!--end::Checkbox-->
+                                            </div>
+                                            <!--end::Wrapper-->
+                                        </td>
+                                        <!--end::Input group-->
+                                    </tr>
+                                    <!--end::Table row-->
+                                    <!--end::Table row-->
+                                </tbody>
+                                <!--end::Table body-->
+                            </table>
+                            <!--end::Table-->
+                        </div>
+                        <!--end::Table wrapper-->
+                    </div>
+                    <!--end::Permissions-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" id="btn-guardar-permisos" value="Default" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const rurl = '@Url.Content("~/Usuario")'
+    const USUARIO_PER = '@Session["USUARIO_PER"]' == 1
+    const USUARIO_URL = '@Url.Content("~/Usuario")'
+    const USUARIOS = '@Session["USUARIOS"].ToString()' === '1'
+
+</script>
+
+@Scripts.Render("~/assets/plugins/custom/uppy/uppy.bundle.js")
+@Scripts.Render(System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/bundles/UsuariosIndex", true))
